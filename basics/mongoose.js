@@ -5,6 +5,7 @@ import express from "express";
 import path from "path";
 const app = express();
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 
 //connecting with mongoose
 mongoose
@@ -34,13 +35,60 @@ app.use(express.static(staticPath));
 //to get data from req.body we'll use express.urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.render("index", { name: "SoumyA", surname: "DaS" });
+//using cookie parser
+app.use(cookieParser());
+
+//creating the middleware for authenticated users
+const authenticated = (req, res, next) => {
+  const { token } = req.cookies;
+  if (token) {
+    next();
+  } else {
+    res.render("login");
+  }
+};
+
+// app.get("/", (req, res) => {
+//   const { token } = req.cookies;
+
+//   if (token) {
+//     res.render("logout");
+//     console.log(req.cookies);
+//   } else {
+//     res.render("login");
+//   }
+
+//   // Now what happens here is we are requesting the cookie to give the key of the cookie which we can verify if the cookie is present or not,
+//   // if present then render the logout page if not then render login page
+// });
+
+app.get("/", authenticated, (req, res) => {
+  res.render("logout");
+  // so, Here we've done the above api is same created as middleware {authenticated}, which will used to find if the user is authenticated or not,
+  // so here we've passed the logout render, because we've used next if token is not present then it will render login page.
 });
 
-app.get("/home", (req, res) => {
-  res.send("index");
+//Login api
+app.post("/login", (req, res) => {
+  res.cookie("token", "soumya", {
+    httpOnly: true, // For making more secure
+    expires: new Date(Date.now() + 60 * 1000),
+  });
+  res.redirect("/");
 });
+
+//Logout api
+app.get("/logout", (req, res) => {
+  res.cookie("token", "", {
+    httpOnly: true, // For making more secure
+    expires: new Date(Date.now()),
+  });
+  res.redirect("/");
+});
+
+// app.get("/home", (req, res) => {
+//   res.send("index");
+// });
 
 app.get("/success", (req, res) => {
   res.render("success");
