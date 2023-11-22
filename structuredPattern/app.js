@@ -49,3 +49,5 @@ app.listen(process.env.PORT, () => {
     `Server is working on port no : ${process.env.PORT} in ${process.env.NODE_ENV} Mode`
   );
 });
+
+// you can use mongoDb atlas for connection..
