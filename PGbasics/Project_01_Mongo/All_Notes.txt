@@ -1,0 +1,40 @@
+HTTP Request are an important part of the API response as they represent the meta-data(Data's Sub-Data) associated with the API request and response.
+Headers carry information for the request and response body
+
+** It is like the request is been sent with some extra info, to the server. which tell about req, res!
+
+// Status Code
+
+1. HTTP status code indicates whether a specific HTTP request has been successfully completed:::
+
+-> 100 - 199 : Informational Responses
+-> 200 - 299 : Successful Responses
+-> 300 - 399 : Redirectional Responses
+-> 400 - 499 : Client error Responses
+-> 500 - 599 : Server Error Responses 
+
+
+// MongoDB ==> Notes
+
+ 1. NoSQL Document Based Database
+ 2. Strong Support for Aggregation Pipes
+ 3. Works on BSON format
+ 4. Best for Node Applications
+
+ // Commands ::
+ -> show dbs : for showing my created Databases
+ -> use db_name : for using the particular Database
+ -> show collections : for showing what are the collections present in the dB
+ -> db.collection_name.find({}) : To show what data or documents are present in the collection.
+ -> db.collection_name.insert({}) : To insert something in the selected collection.
+
+ // Mongoose Commands ::
+
+ ** Structure **
+
+ -> Schema -> Define the Structure
+        Schema -> Model
+            Using this Model we do CRUD operations.
+
+
+

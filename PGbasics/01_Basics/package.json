@@ -1,0 +1,14 @@
+{
+  "name": "pgbasics",
+  "version": "1.0.0",
+  "description": "Learning ",
+  "main": "app.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "soumya",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^8.0.1"
+  }
+}
